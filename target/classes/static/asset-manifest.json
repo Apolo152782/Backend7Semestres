@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3ecd029f.css",
+    "main.js": "/static/js/main.d19922d4.js",
+    "static/js/239.ed8f9980.chunk.js": "/static/js/239.ed8f9980.chunk.js",
+    "static/js/213.edc7a18a.chunk.js": "/static/js/213.edc7a18a.chunk.js",
+    "static/js/667.d5fb3c10.chunk.js": "/static/js/667.d5fb3c10.chunk.js",
+    "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/InicioImagen.jpeg": "/static/media/InicioImagen.6bfd862acf1dd0d8b923.jpeg",
+    "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/StackFlowLogo.png": "/static/media/StackFlowLogo.ffaf8b48cc9f534fc8ae.png",
+    "index.html": "/index.html",
+    "main.3ecd029f.css.map": "/static/css/main.3ecd029f.css.map",
+    "main.d19922d4.js.map": "/static/js/main.d19922d4.js.map",
+    "239.ed8f9980.chunk.js.map": "/static/js/239.ed8f9980.chunk.js.map",
+    "213.edc7a18a.chunk.js.map": "/static/js/213.edc7a18a.chunk.js.map",
+    "667.d5fb3c10.chunk.js.map": "/static/js/667.d5fb3c10.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ecd029f.css",
+    "static/js/main.d19922d4.js"
+  ]
+}
