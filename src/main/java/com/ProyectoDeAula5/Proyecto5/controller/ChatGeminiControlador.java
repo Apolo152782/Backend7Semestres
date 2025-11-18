@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/gemini/chat")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://frontend7-semestre.vercel.app")
 public class ChatGeminiControlador {
 
     private final ConversacionServicio conversacionServicio;

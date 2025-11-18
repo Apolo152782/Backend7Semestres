@@ -8,7 +8,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/gemini")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "https://frontend7-semestre.vercel.app")
 public class GeminiController {
 
     @Autowired

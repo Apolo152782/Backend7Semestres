@@ -20,7 +20,7 @@ import com.ProyectoDeAula5.Proyecto5.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://frontend7-semestre.vercel.app")
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
