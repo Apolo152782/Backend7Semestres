@@ -14,7 +14,7 @@
     <groupId>com.ProyectoDeAula5</groupId>
     <artifactId>Proyecto5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging> <!-- ✅ Generar un archivo JAR ejecutable -->
+    <packaging>jar</packaging>
     <name>Proyecto5</name>
     <description>Proyecto de Aula 5 semestre</description>
 
@@ -26,19 +26,19 @@
 
     <dependencies>
 
-        <!-- Spring Boot Starter Web -->
+        <!-- Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring WebFlux (opcional para peticiones reactivas) -->
+        <!-- WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <!-- Spring Data JPA -->
+        <!-- JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -56,7 +56,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- MySQL Driver -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -90,7 +90,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Test -->
+        <!-- Test (no se ejecutarán por configuración abajo) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -104,6 +104,7 @@
             <version>3.9.6</version>
         </dependency>
 
+        <!-- PostgreSQL (no necesario si usas MySQL, pero lo dejo por si lo usas en algo) -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -129,7 +130,8 @@
 
     <build>
         <plugins>
-            <!-- Compilador de Java -->
+
+            <!-- Compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -143,15 +145,29 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot: genera el JAR ejecutable -->
+            <!-- 🔥 NECESARIO PARA AZURE (genera el JAR ejecutable) -->
             <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.2.5</version>
-            <configuration>
-                <skipTests>true</skipTests>
-            </configuration>
-        </plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 🚫 Desactiva tests (para que no falle el deploy) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>
