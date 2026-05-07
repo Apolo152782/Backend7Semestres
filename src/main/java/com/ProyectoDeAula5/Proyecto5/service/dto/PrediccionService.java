@@ -95,7 +95,7 @@ public class PrediccionService {
     }
 
     // ✅ NUEVO método para predecir desde DNI del cliente (con dni tipo int)
-    public Map<String, Object> predecirPorDni(int dni) throws Exception {
+    public Map<String, Object> predecirPorDni(Long dni) throws Exception {
         Cliente cliente = clienteRepository.findByDni(dni)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado con DNI: " + dni));
 
