@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
     // metodo para encontrar un producto por su codigo
-    Producto findByCodigo(int codigo);
+    Producto findByCodigo(Long codigo);
 
     // metodo para encontrar productos por el ID del proveedor
     List<Producto> findByNombreContainingIgnoreCase(String nombre);
