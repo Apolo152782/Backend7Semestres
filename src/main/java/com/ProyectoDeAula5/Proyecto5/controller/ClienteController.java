@@ -52,7 +52,7 @@ public class ClienteController {
 
     // Cambia este endpoint existente
     @GetMapping("/dni/nombre/{dni}")
-    public ResponseEntity<Cliente> obtenerClientePorDni(@PathVariable int dni) {
+    public ResponseEntity<Cliente> obtenerClientePorDni(@PathVariable Long dni) {
         Cliente cliente = clienteService.obtenerPorDni(dni);
         if (cliente != null) {
             return ResponseEntity.ok(cliente);
