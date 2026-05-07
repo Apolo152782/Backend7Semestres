@@ -31,7 +31,7 @@ public class ProductoController {
     }
 
     @GetMapping("/codigo/detalles/{codigo}")
-    public ResponseEntity<String> obtenerDetallesProductoPorCodigo(@PathVariable int codigo) {
+    public ResponseEntity<String> obtenerDetallesProductoPorCodigo(@PathVariable Long codigo) {
         Producto producto = productoService.obtenerPorCodigo(codigo);
         if (producto != null) {
             String detalles = "Nombre: " + producto.getNombre() +
@@ -44,7 +44,7 @@ public class ProductoController {
     }
 
     @GetMapping("/{codigo}")
-    public Producto obtenerProductoPorCodigo(@PathVariable int codigo) {
+    public Producto obtenerProductoPorCodigo(@PathVariable Long codigo) {
         return productoService.obtenerPorCodigo(codigo);
     }
 
