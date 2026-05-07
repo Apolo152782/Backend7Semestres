@@ -12,7 +12,7 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int codigo;
+    private Long codigo;
     private String nombre;
     private int stock;
     private double precio;
