@@ -16,7 +16,7 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int ruc;
+    private Long ruc;
     private String nombre;
     private String telefono;
     private String direccion;
