@@ -34,7 +34,7 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    public void actualizarInventario(Long codigo, int cantidad) {
+    public void actualizarInventario(int codigo, int cantidad) {
         log.info("Actualizando productos");
         Producto producto = productoRepository.findByCodigo(codigo);
         if (producto != null) {
@@ -47,7 +47,7 @@ public class ProductoService {
         }
     }
 
-    public Producto obtenerPorCodigo(Long codigo) {
+    public Producto obtenerPorCodigo(int codigo) {
         return productoRepository.findByCodigo(codigo);
     }
 
