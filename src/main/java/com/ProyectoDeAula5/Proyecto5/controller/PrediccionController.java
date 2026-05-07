@@ -30,7 +30,7 @@ public class PrediccionController {
     }
 
     @GetMapping("/dni/{dni}")
-    public ResponseEntity<?> predecirPorDni(@PathVariable int dni) {
+    public ResponseEntity<?> predecirPorDni(@PathVariable Long dni) {
         try {
             Map<String, Object> resultado = servicio.predecirPorDni(dni);
             return ResponseEntity.ok(resultado);
