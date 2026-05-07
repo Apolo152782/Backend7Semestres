@@ -33,7 +33,7 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public Cliente obtenerPorDni(int dni) {
+    public Cliente obtenerPorDni(Long dni) {
         return clienteRepository.findByDni(dni).orElse(null);
     }
 
