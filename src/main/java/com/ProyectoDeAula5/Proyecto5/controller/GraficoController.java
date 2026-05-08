@@ -31,4 +31,10 @@ public class GraficoController {
     public List<Object[]> getTopProductos() {
         return detallesRepository.findTopProductos();
     }
+    
+    @GetMapping("/ingresos-mensuales")
+    public List<Object[]> getIngresosMensuales() {
+        return ventaRepository
+            .obtenerIngresosMensuales();
+    }
 }
