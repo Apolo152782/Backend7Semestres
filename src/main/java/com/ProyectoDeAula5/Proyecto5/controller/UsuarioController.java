@@ -60,6 +60,11 @@ public ResponseEntity<?> login(
         );
 
         response.put(
+                "correo",
+                usuario.get().getCorreo()
+        );
+
+        response.put(
                 "cedula",
                 String.valueOf(
                         usuario.get().getCedula()
