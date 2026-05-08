@@ -87,4 +87,35 @@ public ResponseEntity<?> login(
         return ResponseEntity.ok(nuevoUsuario);
     }
 
+    @PutMapping("/usuarios/avatar")
+public ResponseEntity<?> actualizarAvatar(
+        @RequestParam String correo,
+
+        @RequestParam String avatar
+) {
+
+    Optional<Usuario> usuarioOpt =
+            usuarioService
+                    .buscarPorCorreo(correo);
+
+    if (usuarioOpt.isPresent()) {
+
+        Usuario usuario =
+                usuarioOpt.get();
+
+        usuario.setAvatar(avatar);
+
+        usuarioService
+                .saveUsuario(usuario);
+
+        return ResponseEntity.ok(
+                "Avatar actualizado"
+        );
+    }
+
+    return ResponseEntity
+            .badRequest()
+            .body("Usuario no encontrado");
+}
+
 }
