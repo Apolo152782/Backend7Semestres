@@ -33,4 +33,22 @@ public interface VentaRepository extends JpaRepository<Venta, Integer> {
     @Query("SELECT COUNT(v) FROM Venta v WHERE v.nomcliente = :nombreCliente")
     int contarVentasPorCliente(@Param("nombreCliente") String nombreCliente);
 
+    @Query(value = """
+        SELECT
+            DATE_FORMAT(
+                STR_TO_DATE(v.fecha, '%Y-%m-%d'),
+                '%Y-%m'
+            ) AS mes,
+
+            SUM(v.total) AS ingresos
+
+        FROM venta v
+
+        GROUP BY mes
+
+        ORDER BY mes
+        """, nativeQuery = true)
+
+List<Object[]> obtenerIngresosMensuales();
+
 }
