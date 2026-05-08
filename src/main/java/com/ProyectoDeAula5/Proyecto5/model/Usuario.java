@@ -21,5 +21,6 @@ public class Usuario {
     private String pass;
     private String rol;
     private Long cedula;
+    private String avatar = "avatar_default";
 
 }
