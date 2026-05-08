@@ -20,5 +20,6 @@ public class Usuario {
     private String correo;
     private String pass;
     private String rol;
+    private Long cedula;
 
 }
