@@ -55,6 +55,11 @@ public ResponseEntity<?> login(
         );
 
         response.put(
+                "avatar",
+                usuario.get().getAvatar()
+        );
+
+        response.put(
                 "cedula",
                 String.valueOf(
                         usuario.get().getCedula()
