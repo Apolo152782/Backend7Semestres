@@ -25,19 +25,51 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String correo, @RequestParam String pass) {
-        Optional<Usuario> usuario = usuarioService.login(correo, pass);
-        if (usuario.isPresent()) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", "Login exitoso");
-            response.put("nombre", usuario.get().getNombre());
-            response.put("rol", usuario.get().getRol());
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(401).body("Credenciales incorrectas");
-        }
+  @PostMapping("/login")
+public ResponseEntity<?> login(
+        @RequestParam String correo,
+        @RequestParam String pass
+) {
+
+    Optional<Usuario> usuario =
+            usuarioService.login(correo, pass);
+
+    if (usuario.isPresent()) {
+
+        Map<String, String> response =
+                new HashMap<>();
+
+        response.put(
+                "message",
+                "Login exitoso"
+        );
+
+        response.put(
+                "nombre",
+                usuario.get().getNombre()
+        );
+
+        response.put(
+                "rol",
+                usuario.get().getRol()
+        );
+
+        response.put(
+                "cedula",
+                String.valueOf(
+                        usuario.get().getCedula()
+                )
+        );
+
+        return ResponseEntity.ok(response);
+
+    } else {
+
+        return ResponseEntity
+                .status(401)
+                .body("Credenciales incorrectas");
     }
+}
 
     @GetMapping("/usuarios")
     public List<Usuario> getAllUsuarios() {
