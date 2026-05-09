@@ -83,13 +83,16 @@ public class VentaController {
                             != null
             ) {
 
-                emailService.enviarFactura(
+            emailService.enviarFactura(
 
-                        cliente.getCorreo(),
+                    cliente.getCorreo(),
 
-                        venta.getNomcliente(),
+                    venta.getNomcliente(),
 
-                        venta.getTotal()
+                    venta.getNombreEmpleado(),
+
+                    venta.getTotal()
+                
                 );
             }
         }
