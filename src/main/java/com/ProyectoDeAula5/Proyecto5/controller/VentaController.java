@@ -83,20 +83,25 @@ public class VentaController {
                             != null
             ) {
 
-            emailService.enviarFactura(
-
-                    venta.getSubtotal(),
-
-                    venta.getTotal(),
-                    
-                    venta.getMetodoPago(),
-                    
-                    venta.getFecha(),
-                    
-                    venta.getDetallesVenta()
-                
-                );
-            }
+          emailService.enviarFactura(
+        
+                cliente.getCorreo(),
+        
+                venta.getNomcliente(),
+        
+                venta.getNombreEmpleado(),
+        
+                venta.getSubtotal(),
+        
+                venta.getTotal(),
+        
+                venta.getMetodoPago(),
+        
+                venta.getFecha(),
+        
+                venta.getDetallesVenta()
+                        );
+                }
         }
 
     } catch (Exception e) {
