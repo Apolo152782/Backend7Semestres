@@ -81,33 +81,33 @@ public class EmailService {
     """;
 }
 
-          String html = """
+       String html = """
 
 <div style="
     background:#f4f6f9;
-    padding:40px;
+    padding:20px;
     font-family:Arial,sans-serif;
 ">
 
     <div style="
-        max-width:700px;
+        max-width:650px;
         margin:auto;
-        background:white;
-        border-radius:20px;
+        background:#ffffff;
+        border-radius:18px;
         overflow:hidden;
-        box-shadow:0 4px 20px rgba(0,0,0,0.1);
+        box-shadow:0 4px 15px rgba(0,0,0,0.08);
     ">
 
         <div style="
             background:#2f436e;
-            padding:35px;
+            padding:30px;
             text-align:center;
         ">
 
             <h1 style="
-                color:white;
                 margin:0;
-                font-size:34px;
+                color:white;
+                font-size:30px;
             ">
                 Stack<span style="
                     color:#f5b21a;
@@ -118,7 +118,8 @@ public class EmailService {
 
             <p style="
                 color:#dbeafe;
-                margin-top:10px;
+                margin-top:8px;
+                font-size:14px;
             ">
                 Sistema Inteligente de Ventas
             </p>
@@ -126,19 +127,19 @@ public class EmailService {
         </div>
 
         <div style="
-            padding:35px;
+            padding:25px;
         ">
 
             <h2 style="
                 color:#2f436e;
-                margin-bottom:25px;
+                margin-top:0;
             ">
                 Factura de Compra
             </h2>
 
             <p style="
                 color:#444;
-                font-size:16px;
+                line-height:1.5;
             ">
                 Hola
                 <b>
@@ -147,8 +148,10 @@ public class EmailService {
                 gracias por realizar tu compra en StackFlow.
             </p>
 
+            <!-- TABLA PRINCIPAL -->
+
             <div style="
-                margin-top:30px;
+                margin-top:25px;
                 border:1px solid #eee;
                 border-radius:12px;
                 overflow:hidden;
@@ -158,7 +161,6 @@ public class EmailService {
                     width:100%;
                     border-collapse:collapse;
                     table-layout:fixed;
-                    word-break:break-word;
                 ">
 
                     <tr style="
@@ -166,15 +168,18 @@ public class EmailService {
                     ">
 
                         <td style="
-                            padding:14px;
+                            padding:10px;
                             font-weight:bold;
                             width:40%;
+                            font-size:14px;
                         ">
                             Cliente
                         </td>
 
                         <td style="
-                            padding:14px;
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
                         ">
                             """ + nombreCliente + """
                         </td>
@@ -184,18 +189,19 @@ public class EmailService {
                     <tr>
 
                         <td style="
-                            padding:14px;
+                            padding:10px;
                             font-weight:bold;
                             background:#f8fafc;
+                            font-size:14px;
                         ">
                             Empleado
                         </td>
 
                         <td style="
-                            padding:14px;
-                            overflow-wrap:anywhere;
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
                         ">
-                     
                             """ + nombreEmpleado + """
                         </td>
 
@@ -204,15 +210,100 @@ public class EmailService {
                     <tr>
 
                         <td style="
-                            padding:14px;
+                            padding:10px;
                             font-weight:bold;
                             background:#f8fafc;
+                            font-size:14px;
+                        ">
+                            Subtotal
+                        </td>
+
+                        <td style="
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
+                        ">
+                            $""" + subtotal + """
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="
+                            padding:10px;
+                            font-weight:bold;
+                            background:#f8fafc;
+                            font-size:14px;
+                        ">
+                            IVA (19%)
+                        </td>
+
+                        <td style="
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
+                        ">
+                            $""" + (total - subtotal) + """
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="
+                            padding:10px;
+                            font-weight:bold;
+                            background:#f8fafc;
+                            font-size:14px;
+                        ">
+                            Método de Pago
+                        </td>
+
+                        <td style="
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
+                        ">
+                            """ + metodoPago + """
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="
+                            padding:10px;
+                            font-weight:bold;
+                            background:#f8fafc;
+                            font-size:14px;
+                        ">
+                            Fecha
+                        </td>
+
+                        <td style="
+                            padding:10px;
+                            font-size:14px;
+                            word-break:break-word;
+                        ">
+                            """ + fecha + """
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td style="
+                            padding:10px;
+                            font-weight:bold;
+                            background:#f8fafc;
+                            font-size:14px;
                         ">
                             Total Pagado
                         </td>
 
                         <td style="
-                            padding:14px;
+                            padding:10px;
                             color:#16a34a;
                             font-weight:bold;
                             font-size:18px;
@@ -223,137 +314,77 @@ public class EmailService {
 
                     </tr>
 
-              <tr>
-
-    <td style="
-        padding:14px;
-        font-weight:bold;
-        background:#f8fafc;
-    ">
-        Subtotal
-    </td>
-
-    <td style="
-        padding:14px;
-    ">
-        $""" + subtotal + """
-    </td>
-
-</tr>
-
-<tr>
-
-    <td style="
-        padding:14px;
-        font-weight:bold;
-        background:#f8fafc;
-    ">
-        IVA (19%)
-    </td>
-
-    <td style="
-        padding:14px;
-    ">
-        $""" + (total - subtotal) + """
-    </td>
-
-</tr>
-
-<tr>
-
-    <td style="
-        padding:14px;
-        font-weight:bold;
-        background:#f8fafc;
-    ">
-        Método de Pago
-    </td>
-
-    <td style="
-        padding:14px;
-    ">
-        """ + metodoPago + """
-    </td>
-
-</tr>
-
-<tr>
-
-    <td style="
-        padding:14px;
-        font-weight:bold;
-        background:#f8fafc;
-    ">
-        Fecha
-    </td>
-
-    <td style="
-        padding:14px;
-    ">
-        """ + fecha + """
-    </td>
-
-</tr>
-
                 </table>
 
             </div>
 
+            <!-- PRODUCTOS -->
+
+            <div style="
+                margin-top:30px;
+            ">
+
+                <h3 style="
+                    color:#2f436e;
+                    margin-bottom:15px;
+                ">
+                    Productos Comprados
+                </h3>
+
+                <div style="
+                    overflow-x:auto;
+                ">
+
+                    <table style="
+                        width:100%;
+                        border-collapse:collapse;
+                        table-layout:fixed;
+                    ">
+
+                        <tr style="
+                            background:#2f436e;
+                            color:white;
+                        ">
+
+                            <th style="
+                                padding:8px;
+                                font-size:13px;
+                            ">
+                                Producto
+                            </th>
+
+                            <th style="
+                                padding:8px;
+                                font-size:13px;
+                            ">
+                                Cantidad
+                            </th>
+
+                            <th style="
+                                padding:8px;
+                                font-size:13px;
+                            ">
+                                Precio
+                            </th>
+
+                        </tr>
+
+                        """ + productosHtml + """
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!-- INFO -->
+
             <div style="
                 margin-top:30px;
                 background:#f8fafc;
-                padding:20px;
+                padding:18px;
                 border-radius:12px;
             ">
-              <div style="
-    margin-top:30px;
-">
-
-    <h3 style="
-        color:#2f436e;
-        margin-bottom:15px;
-    ">
-        Productos Comprados
-    </h3>
-
-    <table style="
-        width:100%;
-        border-collapse:collapse;
-    ">
-
-        <tr style="
-            background:#2f436e;
-            color:white;
-        ">
-
-            <th style="
-                padding:8px;
-                font-size:14px;
-            ">
-                Producto
-            </th>
-
-            <th style="
-                padding:8px;
-                font-size:14px;
-            ">
-                Cantidad
-            </th>
-
-            <th style="
-                padding:8px;
-                font-size:14px;
-            ">
-                Precio
-            </th>
-
-        </tr>
-
-        """ + productosHtml + """
-
-    </table>
-
-</div>
 
                 <h3 style="
                     margin-top:0;
@@ -362,25 +393,25 @@ public class EmailService {
                     Información de la Compra
                 </h3>
 
-                <p>
-                    ✔ Pago confirmado correctamente
+                <p style="margin:8px 0;">
+                    ✅ Pago confirmado correctamente
                 </p>
 
-                <p>
-                    ✔ Factura generada exitosamente
+                <p style="margin:8px 0;">
+                    ✅ Factura generada exitosamente
                 </p>
 
-                <p>
-                    ✔ Gracias por confiar en StackFlow
+                <p style="margin:8px 0;">
+                    ✅ Gracias por confiar en StackFlow
                 </p>
 
             </div>
 
             <div style="
-                margin-top:40px;
+                margin-top:35px;
                 text-align:center;
                 color:#94a3b8;
-                font-size:13px;
+                font-size:12px;
             ">
 
                 © 2026 StackFlow - Todos los derechos reservados
