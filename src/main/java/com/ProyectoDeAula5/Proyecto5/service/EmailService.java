@@ -157,6 +157,8 @@ public class EmailService {
                 <table style="
                     width:100%;
                     border-collapse:collapse;
+                    table-layout:fixed;
+                    word-break:break-word;
                 ">
 
                     <tr style="
@@ -191,7 +193,9 @@ public class EmailService {
 
                         <td style="
                             padding:14px;
+                            overflow-wrap:anywhere;
                         ">
+                     
                             """ + nombreEmpleado + """
                         </td>
 
@@ -211,7 +215,8 @@ public class EmailService {
                             padding:14px;
                             color:#16a34a;
                             font-weight:bold;
-                            font-size:22px;
+                            font-size:18px;
+                            word-break:break-word;
                         ">
                             $""" + total + """
                         </td>
@@ -322,19 +327,22 @@ public class EmailService {
         ">
 
             <th style="
-                padding:12px;
+                padding:8px;
+                font-size:14px;
             ">
                 Producto
             </th>
 
             <th style="
-                padding:12px;
+                padding:8px;
+                font-size:14px;
             ">
                 Cantidad
             </th>
 
             <th style="
-                padding:12px;
+                padding:8px;
+                font-size:14px;
             ">
                 Precio
             </th>
