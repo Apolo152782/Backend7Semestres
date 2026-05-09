@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import jakarta.mail.internet.MimeMessage;
 
+import java.util.List;
+import com.ProyectoDeAula5.Proyecto5.model.DetalleVenta;
+
 @Service
 public class EmailService {
 
@@ -20,7 +23,11 @@ public class EmailService {
         String destino,
         String nombreCliente,
         String nombreEmpleado,
-        Double total
+        Double subtotal,
+        Double total,
+        String metodoPago,
+        String fecha,
+        List<DetalleVenta> detalles
 
     ) {
 
@@ -40,6 +47,39 @@ public class EmailService {
             helper.setSubject(
                     "Factura StackFlow"
             );
+            String productosHtml = "";
+            for (DetalleVenta d : detalles) {
+
+    productosHtml += """
+
+    <tr>
+
+        <td style="
+            padding:12px;
+            border-bottom:1px solid #eee;
+        ">
+            """ + d.getNompro() + """
+        </td>
+
+        <td style="
+            padding:12px;
+            border-bottom:1px solid #eee;
+            text-align:center;
+        ">
+            """ + d.getCantidad() + """
+        </td>
+
+        <td style="
+            padding:12px;
+            border-bottom:1px solid #eee;
+            text-align:right;
+        ">
+            $""" + d.getPrecio() + """
+        </td>
+
+    </tr>
+    """;
+}
 
           String html = """
 
@@ -178,6 +218,78 @@ public class EmailService {
 
                     </tr>
 
+              <tr>
+
+    <td style="
+        padding:14px;
+        font-weight:bold;
+        background:#f8fafc;
+    ">
+        Subtotal
+    </td>
+
+    <td style="
+        padding:14px;
+    ">
+        $""" + subtotal + """
+    </td>
+
+</tr>
+
+<tr>
+
+    <td style="
+        padding:14px;
+        font-weight:bold;
+        background:#f8fafc;
+    ">
+        IVA (19%)
+    </td>
+
+    <td style="
+        padding:14px;
+    ">
+        $""" + (total - subtotal) + """
+    </td>
+
+</tr>
+
+<tr>
+
+    <td style="
+        padding:14px;
+        font-weight:bold;
+        background:#f8fafc;
+    ">
+        Método de Pago
+    </td>
+
+    <td style="
+        padding:14px;
+    ">
+        """ + metodoPago + """
+    </td>
+
+</tr>
+
+<tr>
+
+    <td style="
+        padding:14px;
+        font-weight:bold;
+        background:#f8fafc;
+    ">
+        Fecha
+    </td>
+
+    <td style="
+        padding:14px;
+    ">
+        """ + fecha + """
+    </td>
+
+</tr>
+
                 </table>
 
             </div>
@@ -188,6 +300,52 @@ public class EmailService {
                 padding:20px;
                 border-radius:12px;
             ">
+              <div style="
+    margin-top:30px;
+">
+
+    <h3 style="
+        color:#2f436e;
+        margin-bottom:15px;
+    ">
+        Productos Comprados
+    </h3>
+
+    <table style="
+        width:100%;
+        border-collapse:collapse;
+    ">
+
+        <tr style="
+            background:#2f436e;
+            color:white;
+        ">
+
+            <th style="
+                padding:12px;
+            ">
+                Producto
+            </th>
+
+            <th style="
+                padding:12px;
+            ">
+                Cantidad
+            </th>
+
+            <th style="
+                padding:12px;
+            ">
+                Precio
+            </th>
+
+        </tr>
+
+        """ + productosHtml + """
+
+    </table>
+
+</div>
 
                 <h3 style="
                     margin-top:0;
