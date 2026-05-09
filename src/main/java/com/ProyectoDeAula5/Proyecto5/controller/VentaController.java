@@ -85,13 +85,15 @@ public class VentaController {
 
             emailService.enviarFactura(
 
-                    cliente.getCorreo(),
+                    venta.getSubtotal(),
 
-                    venta.getNomcliente(),
-
-                    venta.getNombreEmpleado(),
-
-                    venta.getTotal()
+                    venta.getTotal(),
+                    
+                    venta.getMetodoPago(),
+                    
+                    venta.getFecha(),
+                    
+                    venta.getDetallesVenta()
                 
                 );
             }
