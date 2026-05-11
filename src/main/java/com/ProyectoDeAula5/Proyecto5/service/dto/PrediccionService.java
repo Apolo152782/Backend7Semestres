@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import com.ProyectoDeAula5.Proyecto5.model.*;
 import com.ProyectoDeAula5.Proyecto5.repository.*;
 
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+
 import weka.core.DenseInstance;
 import weka.core.Instances;
 import weka.classifiers.Classifier;
@@ -149,39 +152,96 @@ public class PrediccionService {
         dto.setSatisfaccion(satisfaccion != null ? satisfaccion : 3.0);
 
         // Realizar predicción
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("dataset_compras22.arff");
-        if (inputStream == null) {
-            throw new RuntimeException("No se pudo encontrar el archivo dataset_compras22.arff");
-        }
+        RestTemplate restTemplate = new RestTemplate();
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        Instances data = new Instances(reader);
-        reader.close();
-        data.setClassIndex(data.numAttributes() - 1);
+        String flaskUrl =
+                "http://127.0.0.1:5000/predict";
 
-        InputStream modelStream = getClass().getClassLoader().getResourceAsStream("j48modelo.model");
-        if (modelStream == null) {
-            throw new RuntimeException("No se pudo encontrar el archivo j48modelo.model");
-        }
+        Map<String, Object> requestBody =
+                new HashMap<>();
 
-        Classifier model = (Classifier) SerializationHelper.read(modelStream);
+        requestBody.put(
+                "edad",
+                cliente.getEdad()
+        );
 
-        Instance instancia = new DenseInstance(data.numAttributes());
-        instancia.setDataset(data);
-        instancia.setValue(data.attribute("Genero"), data.attribute("Genero").indexOfValue(dto.getGenero()));
-        instancia.setValue(data.attribute("Frecuencia_Compra"), dto.getFrecuenciaCompra());
-        instancia.setValue(data.attribute("Monto_Promedio"), dto.getMontoPromedio());
-        instancia.setValue(data.attribute("Ultima_Compra"), dto.getUltimaCompra());
-        instancia.setValue(data.attribute("Descuento_Recibido"),
-                data.attribute("Descuento_Recibido").indexOfValue(dto.getDescuentoRecibido()));
-        instancia.setValue(data.attribute("Metodo_Pago"),
-                data.attribute("Metodo_Pago").indexOfValue(dto.getMetodoPago()));
-        instancia.setValue(data.attribute("Satisfaccion"), dto.getSatisfaccion());
+        requestBody.put(
+                "frecuenciaCompra",
+                frecuenciaCompra
+        );
 
-        double resultadoIndex = model.classifyInstance(instancia);
-        String resultado = data.classAttribute().value((int) resultadoIndex);
-        double[] distribucion = model.distributionForInstance(instancia);
-        double probabilidad = distribucion[(int) resultadoIndex];
+        requestBody.put(
+                "montoPromedio",
+                montoPromedio
+        );
+
+        requestBody.put(
+                "diasUltimaCompra",
+                diasDesdeUltimaCompra
+        );
+
+        requestBody.put(
+                "satisfaccion",
+                dto.getSatisfaccion()
+        );
+
+        requestBody.put(
+                "totalHistorico",
+                ventas.stream()
+                        .mapToDouble(Venta::getTotal)
+                        .sum()
+        );
+
+        requestBody.put(
+                "cantidadProductos",
+                ventas.stream()
+                        .mapToInt(
+                                v -> v.getDetallesVenta().size()
+                        )
+                        .average()
+                        .orElse(1)
+        );
+
+        requestBody.put(
+                "usaTarjeta",
+
+                metodoMasFrecuente.equals("Tarjeta")
+                        ? 1
+                        : 0
+        );
+
+        HttpHeaders headers =
+                new HttpHeaders();
+
+        headers.setContentType(
+                MediaType.APPLICATION_JSON
+        );
+
+        HttpEntity<Map<String, Object>> entity =
+                new HttpEntity<>(
+                        requestBody,
+                        headers
+                );
+
+        ResponseEntity<IAResponseDTO> responseEntity =
+
+                restTemplate.postForEntity(
+
+                        flaskUrl,
+
+                        entity,
+
+                        IAResponseDTO.class
+                );
+
+        IAResponseDTO iaResponse =
+                responseEntity.getBody();
+
+        String resultado =
+                iaResponse.getResultado();
+
+        double probabilidad =
+                iaResponse.getProbabilidad();
 
         // Guardar en base de datos
         PrediccionCompra prediccion = new PrediccionCompra();
