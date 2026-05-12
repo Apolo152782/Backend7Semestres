@@ -42,6 +42,8 @@ public class ClienteController {
         clienteExistente.setGenero(clienteDetalles.getGenero());
         clienteExistente.setDireccion(clienteDetalles.getDireccion());
         clienteExistente.setRazon(clienteDetalles.getRazon());
+        clienteExistente.setCorreo(clienteDetalles.getCorreo());
+
         return clienteService.guardar(clienteExistente);
     }
 
