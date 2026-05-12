@@ -126,20 +126,6 @@ public class PrediccionService {
                 .map(Map.Entry::getKey)
                 .orElseThrow(() -> new RuntimeException("No hay método de pago válido"));
 
-        switch (metodoMasFrecuente) {
-            case "tarjeta":
-                metodoMasFrecuente = "Tarjeta";
-                break;
-            case "transferencia":
-                metodoMasFrecuente = "Transferencia";
-                break;
-            case "efectivo":
-                metodoMasFrecuente = "Efectivo";
-                break;
-            default:
-                throw new RuntimeException("Método de pago desconocido para el modelo: " + metodoMasFrecuente);
-        }
-
         // Armar DTO para predicción
         PrediccionCompraDTO dto = new PrediccionCompraDTO();
         dto.setGenero(capitalizar(cliente.getGenero()));
