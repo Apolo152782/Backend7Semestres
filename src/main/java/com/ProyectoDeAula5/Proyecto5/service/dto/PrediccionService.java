@@ -140,7 +140,7 @@ public class PrediccionService {
         // Realizar predicción
         RestTemplate restTemplate = new RestTemplate();
 
-        String flaskUrl = "https://stackflow-rna-api.onrender.com/predict";
+        String flaskUrl = "https://stackflow-rna-api-ccegabb0egeuedeq.mexicocentral-01.azurewebsites.net/predict";
 
         Map<String, Object> requestBody =
                 new HashMap<>();
