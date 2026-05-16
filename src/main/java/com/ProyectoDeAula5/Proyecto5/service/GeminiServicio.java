@@ -93,10 +93,53 @@ Responde siempre de forma:
     return enviarConReintentos(body);
     }
 
-    public String generarTextoConHistorial(List<Map<String, Object>> contenidos) {
-        Map<String, Object> body = Map.of("contents", contenidos);
-        return enviarConReintentos(body);
-    }
+    public String generarTextoConHistorial(
+        List<Map<String, Object>> contenidos) {
+
+    String contexto = """
+            Eres StackFlow Assistant.
+
+            Eres un asistente EXCLUSIVAMENTE empresarial.
+
+            SOLO puedes responder preguntas relacionadas con:
+
+            - ventas
+            - clientes
+            - productos
+            - inventario
+            - proveedores
+            - reportes
+            - predicciones IA
+            - negocios
+            - gestión comercial
+
+            REGLA OBLIGATORIA:
+
+            Si la pregunta NO está relacionada con StackFlow,
+            empresas, ventas, inventario o clientes,
+            DEBES responder ÚNICAMENTE:
+
+            "Solo puedo ayudarte con temas relacionados con StackFlow y gestión empresarial."
+
+            Nunca respondas temas externos.
+            """;
+
+    List<Map<String, Object>> contenidosFinal =
+            new java.util.ArrayList<>();
+
+    contenidosFinal.add(
+            Map.of(
+                    "role", "user",
+                    "parts", List.of(
+                            Map.of("text", contexto))));
+
+    contenidosFinal.addAll(contenidos);
+
+    Map<String, Object> body =
+            Map.of("contents", contenidosFinal);
+
+    return enviarConReintentos(body);
+}
 
     private String enviarConReintentos(Map<String, Object> body) {
         int intento = 0;
