@@ -30,69 +30,23 @@ public class GeminiServicio {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public String generarTextoConHistorial(
+   public String generarTexto(String prompt) {
+
+    Map<String, Object> body = Map.of(
+            "contents", List.of(
+                    Map.of(
+                            "role", "user",
+                            "parts", List.of(
+                                    Map.of("text", prompt)))));
+
+    return enviarConReintentos(body);
+}
+
+public String generarTextoConHistorial(
         List<Map<String, Object>> contenidos) {
 
-    String contexto = """
-           Eres StackFlow Assistant.
-                        
-                        Eres un asistente EXCLUSIVAMENTE empresarial.
-                        
-                        SOLO puedes responder preguntas relacionadas con:
-                        
-                        - ventas
-                        - clientes
-                        - productos
-                        - inventario
-                        - proveedores
-                        - reportes
-                        - predicciones IA
-                        - negocios
-                        - gestión comercial
-                        
-                        REGLA OBLIGATORIA:
-                        
-                        Si la pregunta NO está relacionada con StackFlow,
-                        empresas, ventas, inventario o clientes,
-                        DEBES responder ÚNICAMENTE:
-                        
-                        "Lo siento, solo puedo ayudarte con temas relacionados con StackFlow y gestión empresarial."
-                        
-                        NO expliques.
-                        NO agregues información extra.
-                        NO respondas parcialmente.
-                        NO intentes ser útil fuera del contexto empresarial.
-                        
-                        Nunca hables de:
-                        - política
-                        - religión
-                        - deportes
-                        - videojuegos
-                        - entretenimiento
-                        - famosos
-                        - programación externa
-                        - temas personales
-                        
-                        Responde siempre de forma:
-                        - profesional
-                        - breve
-                        - clara
-                        - organizada
-                        """;
-
-    List<Map<String, Object>> contenidosFinal =
-            new java.util.ArrayList<>();
-
-    contenidosFinal.add(
-            Map.of(
-                    "role", "user",
-                    "parts", List.of(
-                            Map.of("text", contexto))));
-
-    contenidosFinal.addAll(contenidos);
-
     Map<String, Object> body =
-            Map.of("contents", contenidosFinal);
+            Map.of("contents", contenidos);
 
     return enviarConReintentos(body);
 }
